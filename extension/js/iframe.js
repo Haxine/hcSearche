@@ -57,11 +57,13 @@
     let $modalData = $('#modalData');
     if ($modalData.length < 1)
         return false;
-    
-    $modalData.remove();
-    
+
     let modalDataStr = $modalData.val().trim();
     let data = JSON.parse(modalDataStr);
+    
+    setTimeout(function(){
+        $modalData.remove();
+    }, 1500);
     
     // dom
     
