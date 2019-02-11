@@ -314,6 +314,13 @@ function openEngine(seIndex, newPos = false) {
                 },
                 function (pagedata) {
 
+                    // 把 &quot; 插入 textarea 再获取会导致转义回 " 导致破坏 JSON 格式
+                    // 这里提前把转义的 &quot; 换成符合 JSON 格式的 \" 
+                    // 后面再插入 textarea 什么的就不影响了
+                    if (pagedata.body) {
+                        pagedata.body = pagedata.body.replace(new RegExp('&quot;', 'g'), '\"');
+                    }
+                
                     ajaxPageCache.pages.push(pagedata);
                     modalData.pages = ajaxPageCache.pages;
                     
